@@ -10,7 +10,7 @@
         :root {
             --primary-color: #333;
             --secondary-color: #555;
-            --accent-color: #007bff;
+            --accent-color: #007bff; /* Used only for links now */
             --background-color: #f9f9f9;
             --card-background: #ffffff;
             --border-color: #eee;
@@ -62,7 +62,7 @@
 
         .section-card h2,
         .section-card h3 {
-            color: var(--accent-color);
+            color: var(--primary-color); /* Changed from accent color */
             font-size: 1.5em;
             margin-top: 0;
             margin-bottom: 15px;
@@ -97,7 +97,7 @@
         }
         
         ul li::marker {
-            color: var(--accent-color); /* Bullet color */
+            color: var(--primary-color); /* Bullet color changed to black */
         }
 
         hr {
@@ -123,7 +123,7 @@
         }
 
         .toc a {
-            color: var(--accent-color);
+            color: var(--accent-color); /* Links remain blue */
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1em;
@@ -195,7 +195,7 @@
     <div class="container">
         <div class="section-card">
             <p><strong>Effective Date:</strong> Date of NFT Minting/Sale</p>
-            <p>This **NFT Ownership License** (**License**) is a legal agreement between **Joseph A. J. Bray** (**Licensor**) and the current owner (**Owner**) of the Non-Fungible Token (**NFT**) titled "**NAME OF NFT**".</p>
+            <p>This NFT Ownership License (License) is a legal agreement between Joseph A. J. Bray (Licensor) and the current owner (Owner) of the Non-Fungible Token (NFT) titled "NAME OF NFT".</p>
             <p>By acquiring and holding this NFT, the Owner agrees to be bound by the terms and conditions of this License.</p>
         </div>
 
@@ -221,33 +221,33 @@
 
         <div class="section-card" id="preamble">
             <h2>Preamble (WHEREAS)</h2>
-            <p><strong>WHEREAS:</strong></p>
+            <p>WHEREAS:</p>
             <ul>
-                <li>The **Licensor** has created a unique 3D GBL digital artwork (the "**Artwork**") associated with this **NFT**.</li>
-                <li>The **Artwork** incorporates the **Drip logo**, which is the intellectual property of Drip (**Drip IP**).</li>
-                <li>The **Licensor** has been granted specific, limited permission by Drip to include the **Drip IP** within the **Artwork** for personal use and as an **NFT** collectible on the Drip platform.</li>
-                <li>The **Owner** acknowledges and agrees that all intellectual property rights in the **Artwork** (excluding the **Drip IP**) remain with the **Licensor**, and all intellectual property rights in the **Drip IP** remain with Drip.</li>
+                <li>The Licensor has created a unique 3D GBL digital artwork (the "Artwork") associated with this NFT.</li>
+                <li>The Artwork incorporates the Drip logo, which is the intellectual property of Drip (Drip IP).</li>
+                <li>The Licensor has been granted specific, limited permission by Drip to include the Drip IP within the Artwork for personal use and as an NFT collectible on the Drip platform.</li>
+                <li>The Owner acknowledges and agrees that all intellectual property rights in the Artwork (excluding the Drip IP) remain with the Licensor, and all intellectual property rights in the Drip IP remain with Drip.</li>
             </ul>
         </div>
 
         <div class="section-card" id="ownership-rights">
             <h2>1. NFT Ownership and Rights</h2>
             <ul>
-                <li>The **Owner** possesses ownership of the unique cryptographic token on the Solana blockchain that represents this **NFT**.</li>
-                <li>Ownership of the **NFT** itself does not convey ownership of any intellectual property rights (including, but not limited to, copyright or trademark) in the underlying **Artwork**. These rights remain with the **Licensor** (for the **Artwork**, excluding **Drip IP**) and Drip (for the **Drip IP**), respectively.</li>
+                <li>The Owner possesses ownership of the unique cryptographic token on the Solana blockchain that represents this NFT.</li>
+                <li>Ownership of the NFT itself does not convey ownership of any intellectual property rights (including, but not limited to, copyright or trademark) in the underlying Artwork. These rights remain with the Licensor (for the Artwork, excluding Drip IP) and Drip (for the Drip IP), respectively.</li>
             </ul>
         </div>
 
         <div class="section-card" id="permitted-uses">
             <h2>2. Permitted Uses of the Artwork (Non-Commercial)</h2>
             <ul>
-                <li>The **Licensor** grants the **Owner** a limited, non-exclusive, worldwide, royalty-free, and non-sublicensable license to display and use the **Artwork** for **personal, non-commercial purposes only**, for as long as they own the **NFT**.</li>
+                <li>The Licensor grants the Owner a limited, non-exclusive, worldwide, royalty-free, and non-sublicensable license to display and use the Artwork for personal, non-commercial purposes only, for as long as they own the NFT.</li>
                 <li>Permitted personal uses include, but are not limited to:
                     <ul>
-                        <li>Displaying the **NFT** in a personal digital wallet, collection, or private gallery.</li>
-                        <li>Using the **NFT** as a personal avatar or profile picture on social media platforms.</li>
-                        <li>Incorporating the **NFT** for non-commercial purposes within a personal blog, website, or presentation.</li>
-                        <li>Utilizing the **NFT** as a collectible on the Drip platform, consistent with Drip's terms and conditions.</li>
+                        <li>Displaying the NFT in a personal digital wallet, collection, or private gallery.</li>
+                        <li>Using the NFT as a personal avatar or profile picture on social media platforms.</li>
+                        <li>Incorporating the NFT for non-commercial purposes within a personal blog, website, or presentation.</li>
+                        <li>Utilizing the NFT as a collectible on the Drip platform, consistent with Drip's terms and conditions.</li>
                     </ul>
                 </li>
             </ul>
@@ -256,86 +256,86 @@
         <div class="section-card" id="restrictions-use">
             <h2>3. Specific Restrictions on Use (Drip IP & Commercial Use)</h2>
             <ul>
-                <li>The **Owner** is **strictly prohibited** from using the **Artwork**, or any part thereof (especially the **Drip IP**), for **any commercial purpose whatsoever**.</li>
+                <li>The Owner is strictly prohibited from using the Artwork, or any part thereof (especially the Drip IP), for any commercial purpose whatsoever.</li>
                 <li>Prohibited commercial uses include, but are not limited to:
                     <ul>
-                        <li>Selling, licensing, sublicensing, or distributing the **Artwork** or any derivative works of the **Artwork** to a third party for monetary gain or commercial value.</li>
-                        <li>Using the **Artwork** (or any part of it, including the **Drip IP**) for advertising, marketing, or promotion of any third-party products, services, or brands.</li>
-                        <li>Creating, manufacturing, or selling physical or digital merchandise (e.g., t-shirts, prints, games) that incorporates the **Artwork** or the **Drip IP**.</li>
-                        <li>Any use that implies endorsement by Drip, or that creates confusion regarding the origin or ownership of the Drip brand or **Drip IP**.</li>
+                        <li>Selling, licensing, sublicensing, or distributing the Artwork or any derivative works of the Artwork to a third party for monetary gain or commercial value.</li>
+                        <li>Using the Artwork (or any part of it, including the Drip IP) for advertising, marketing, or promotion of any third-party products, services, or brands.</li>
+                        <li>Creating, manufacturing, or selling physical or digital merchandise (e.g., t-shirts, prints, games) that incorporates the Artwork or the Drip IP.</li>
+                        <li>Any use that implies endorsement by Drip, or that creates confusion regarding the origin or ownership of the Drip brand or Drip IP.</li>
                     </ul>
                 </li>
-                <li>The **Owner** may not modify, alter, or create derivative works of the **Drip IP** within the **Artwork**. Any modifications to the 3D GBL artwork must not misrepresent, dilute, or infringe upon the **Drip IP**.</li>
-                <li>This **License** does not grant the **Owner** any rights to register or claim intellectual property rights (e.g., copyright, trademark) in the **Artwork** or the **Drip IP**.</li>
-                <li>The **Owner** acknowledges that the **Drip IP** (logo) is subject to separate terms and conditions imposed by Drip. The **Owner**'s discretion in displaying the **Artwork**, which incorporates the **Drip IP**, is strictly limited to the personal, non-commercial uses permitted under Section 2 of this **License** and must not infringe upon Drip's intellectual property rights or violate Drip's specific licensing terms for their logo.</li>
+                <li>The Owner may not modify, alter, or create derivative works of the Drip IP within the Artwork. Any modifications to the 3D GBL artwork must not misrepresent, dilute, or infringe upon the Drip IP.</li>
+                <li>This License does not grant the Owner any rights to register or claim intellectual property rights (e.g., copyright, trademark) in the Artwork or the Drip IP.</li>
+                <li>The Owner acknowledges that the Drip IP (logo) is subject to separate terms and conditions imposed by Drip. The Owner's discretion in displaying the Artwork, which incorporates the Drip IP, is strictly limited to the personal, non-commercial uses permitted under Section 2 of this License and must not infringe upon Drip's intellectual property rights or violate Drip's specific licensing terms for their logo.</li>
             </ul>
         </div>
 
         <div class="section-card" id="transfer-nft">
             <h2>4. Transfer of NFT</h2>
             <ul>
-                <li>The **Owner** may sell or transfer the **NFT** to a third party on a legitimate **NFT** marketplace.</li>
-                <li>Any subsequent owner of the **NFT** shall automatically be bound by the terms and conditions of this **License** upon acquiring the **NFT**. The original **Licensor**, **Joseph A. J. Bray**, shall not be responsible for ensuring the new owner's adherence to these terms.</li>
+                <li>The Owner may sell or transfer the NFT to a third party on a legitimate NFT marketplace.</li>
+                <li>Any subsequent owner of the NFT shall automatically be bound by the terms and conditions of this License upon acquiring the NFT. The original Licensor, Joseph A. J. Bray, shall not be responsible for ensuring the new owner's adherence to these terms.</li>
             </ul>
         </div>
 
         <div class="section-card" id="termination-rights">
             <h2>5. Termination of Usage Rights</h2>
-            <p>Upon the transfer of ownership or **burning** of this **NFT**, the **Owner**'s right to use or display the associated **Artwork** under this **License** terminates immediately. However, any displays of the **Artwork** made prior to the transfer of ownership may be maintained, provided no new displays or uses of the **Artwork** are created or continued after such transfer. This limited right to maintain existing displays is subject to obtaining a separate, written license from **Joseph A. J. Bray**, by contacting the **Licensor** through the official channel: **Staplezstudios@gmail.com**.</p>
+            <p>Upon the transfer of ownership or burning of this NFT, the Owner's right to use or display the associated Artwork under this License terminates immediately. However, any displays of the Artwork made prior to the transfer of ownership may be maintained, provided no new displays or uses of the Artwork are created or continued after such transfer. This limited right to maintain existing displays is subject to obtaining a separate, written license from Joseph A. J. Bray, by contacting the Licensor through the official channel: Staplezstudios@gmail.com.</p>
         </div>
 
         <div class="section-card" id="disclaimer">
             <h2>6. Disclaimer and Limitation of Liability</h2>
             <ul>
-                <li>The **NFT** and associated **Artwork** are provided "**as is**" without warranties of any kind, either express or implied.</li>
-                <li>The **Licensor** disclaims all liability for any damages or losses arising from the **Owner**'s use of the **NFT** or **Artwork**, including any unintended or unauthorized commercial use or infringement involving the **Drip IP**.</li>
+                <li>The NFT and associated Artwork are provided "as is" without warranties of any kind, either express or implied.</li>
+                <li>The Licensor disclaims all liability for any damages or losses arising from the Owner's use of the NFT or Artwork, including any unintended or unauthorized commercial use or infringement involving the Drip IP.</li>
             </ul>
         </div>
 
         <div class="section-card" id="governing-law">
             <h2>7. Governing Law</h2>
-            <p>This **License** shall be governed by and construed in accordance with the laws of the **Province of Ontario, Canada**, applicable therein, without regard to its conflict of laws principles.</p>
+            <p>This License shall be governed by and construed in accordance with the laws of the Province of Ontario, Canada, applicable therein, without regard to its conflict of laws principles.</p>
         </div>
 
         <div class="section-card" id="entire-agreement">
             <h2>8. Entire Agreement</h2>
-            <p>This **License** constitutes the entire agreement between the **Licensor** and the **Owner** regarding the use of the **Artwork** and supersedes all prior or contemporaneous agreements, understandings, or representations, whether written or oral.</p>
+            <p>This License constitutes the entire agreement between the Licensor and the Owner regarding the use of the Artwork and supersedes all prior or contemporaneous agreements, understandings, or representations, whether written or oral.</p>
         </div>
 
         <div class="section-card" id="indemnification">
             <h2>9. Indemnification</h2>
-            <p>The **Owner** agrees to indemnify, defend, and hold harmless the **Licensor**, its affiliates, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or in any way connected with the **Owner**'s access to, use of, or inability to use the **NFT** or **Artwork**, or the **Owner**'s breach of any term of this **License**, including but not limited to any unauthorized commercial use of the **Artwork** or infringement of the **Drip IP**.</p>
+            <p>The Owner agrees to indemnify, defend, and hold harmless the Licensor, its affiliates, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or in any way connected with the Owner's access to, use of, or inability to use the NFT or Artwork, or the Owner's breach of any term of this License, including but not limited to any unauthorized commercial use of the Artwork or infringement of the Drip IP.</p>
         </div>
 
         <div class="section-card" id="severability">
             <h2>10. Severability</h2>
-            <p>If any provision of this **License** is found to be invalid, illegal, or unenforceable, the validity, legality, and enforceability of the remaining provisions shall not in any way be affected or impaired thereby.</p>
+            <p>If any provision of this License is found to be invalid, illegal, or unenforceable, the validity, legality, and enforceability of the remaining provisions shall not in any way be affected or impaired thereby.</p>
         </div>
 
         <div class="section-card" id="waiver">
             <h2>11. Waiver</h2>
-            <p>No waiver by the **Licensor** of any breach of this **License** shall be a waiver of any preceding or succeeding breach. No waiver by the **Licensor** of any right under this **License** shall be construed as a waiver of any other right.</p>
+            <p>No waiver by the Licensor of any breach of this License shall be a waiver of any preceding or succeeding breach. No waiver by the Licensor of any right under this License shall be construed as a waiver of any other right.</p>
         </div>
 
         <div class="section-card" id="assignment">
             <h2>12. Assignment</h2>
-            <p>This **License** is personal to the **Owner** and may not be assigned or transferred by the **Owner**, except as expressly provided in Section 4 (Transfer of NFT). The **Licensor** may assign its rights and obligations under this **License** without restriction.</p>
+            <p>This License is personal to the Owner and may not be assigned or transferred by the Owner, except as expressly provided in Section 4 (Transfer of NFT). The Licensor may assign its rights and obligations under this License without restriction.</p>
         </div>
 
         <div class="section-card" id="headings">
             <h2>13. Headings</h2>
-            <p>The headings in this **License** are for convenience only and shall not affect its interpretation.</p>
+            <p>The headings in this License are for convenience only and shall not affect its interpretation.</p>
         </div>
 
         <div class="section-card">
-            <p>By holding this **NFT**, the **Owner** acknowledges that they have read, understood, and agree to be bound by the terms and conditions of this **License**.</p>
+            <p>By holding this NFT, the Owner acknowledges that they have read, understood, and agree to be bound by the terms and conditions of this License.</p>
         </div>
 
         <div class="section-card highlight">
             <h3>Crucial Next Steps for You:</h3>
             <ul>
-                <li>**NFT Details:** Remember to replace "NAME OF NFT" and "Date of NFT Minting/Sale" with your specific information when you finalize this for use.</li>
-                <li>**Legal Review:** While this document is robust, it's always highly recommended to consult with a qualified lawyer specializing in intellectual property and/or blockchain law. They can provide legal advice specific to your situation and ensure complete compliance.</li>
+                <li><strong>NFT Details:</strong> Remember to replace "NAME OF NFT" and "Date of NFT Minting/Sale" with your specific information when you finalize this for use.</li>
+                <li><strong>Legal Review:</strong> While this document is robust, it's always highly recommended to consult with a qualified lawyer specializing in intellectual property and/or blockchain law. They can provide legal advice specific to your situation and ensure complete compliance.</li>
             </ul>
         </div>
     </div>
