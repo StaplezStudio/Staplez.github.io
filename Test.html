@@ -3,16 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLB Viewer with Link</title>
+    <title>Staplez Studios Nft "Candy Chair"</title>
     <style>
-        body { margin: 0; overflow: hidden; display: flex; flex-direction: column; height: 100vh; font-family: sans-serif; background-color: #222; color: #eee; }
-        #controls { padding: 10px; background-color: #333; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        #modelURL { flex-grow: 1; padding: 8px; border: 1px solid #555; border-radius: 4px; background-color: #444; color: #eee; max-width: 600px; }
-        #loadButton { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        #loadButton:hover { background-color: #0056b3; }
-        #info { margin-left: 20px; font-size: 0.9em; }
-        #viewer-container { flex-grow: 1; width: 100%; display: flex; justify-content: center; align-items: center; background-color: #111; }
-        canvas { display: block; }
+        body { margin: 0; padding: 20px; font-family: sans-serif; background-color: #222; color: #eee; }
+        h1, h3 { color: #007bff; }
+        #content-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+            gap: 20px; /* Space between items */
+            align-items: flex-start; /* Align items to the top */
+        }
+        #image-and-text {
+            flex: 1 1 300px; /* Allows this section to grow/shrink, min-width 300px */
+            max-width: 100%; /* Ensures it doesn't overflow */
+        }
+        #glb-viewer-container {
+            flex: 1 1 300px; /* Allows this section to grow/shrink, min-width 300px */
+            max-width: 100%; /* Ensures it doesn't overflow */
+            background-color: #111;
+            border: 1px solid #444;
+            border-radius: 8px;
+            overflow: hidden; /* Important for canvas within */
+            min-height: 250px; /* Minimum height for the viewer */
+            display: flex; /* To center the loading text */
+            justify-content: center;
+            align-items: center;
+            position: relative; /* For loading overlay */
+        }
+        #glb-viewer-container canvas {
+            display: block;
+            width: 100% !important; /* Override inline style from three.js */
+            height: 100% !important; /* Override inline style from three.js */
+        }
         #loading-overlay {
             position: absolute;
             top: 0;
@@ -24,25 +46,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5em;
+            font-size: 1em;
             z-index: 100;
             display: none; /* Hidden by default */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px;
+            margin-bottom: 10px; /* For mobile stacking */
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <div id="controls">
-        <label for="modelURL">GLB Model URL:</label>
-        <input type="text" id="modelURL" placeholder="e.g., https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb">
-        <button id="loadButton">Load Model</button>
-        <div id="info">
-            <p>Drag and rotate with mouse. Scroll to zoom.</p>
-        </div>
-    </div>
+    <h1>Staplez Studios Nft "Candy Chair"</h1>
 
-    <div id="viewer-container">
-        <div id="loading-overlay">Loading Model...</div>
+    <div id="content-wrapper">
+        <div id="image-and-text">
+            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVyCEHxvhJ9I_vweexb1_vHI?ext=png" alt="Candy Chair NFT image" style="max-width:100%; height:auto;">
+            <h3>Download & Licensing</h3>
+            <p>This digital asset is protected by a license agreement. Access to the file itself does not convey any usage rights; these are granted solely through ownership of the corresponding NFT. We encourage you to review the full license agreement to understand the scope of your rights as an NFT holder.</p>
+            <button onclick="downloadArweaveFile()">GLB File</button>
+            <button onclick="location.href='https://staplezstudio.github.io/CommercialLicense/'">GLB License Information</button>
+        </div>
+
+        <div id="glb-viewer-container">
+            <div id="loading-overlay">Loading 3D Model...</div>
+            </div>
     </div>
 
     <script type="importmap">
@@ -59,28 +98,26 @@
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
         let scene, camera, renderer, model, controls;
-        const viewerContainer = document.getElementById('viewer-container');
+        const glbViewerContainer = document.getElementById('glb-viewer-container');
         const loadingOverlay = document.getElementById('loading-overlay');
-        const modelURLInput = document.getElementById('modelURL');
-        const loadButton = document.getElementById('loadButton');
 
-        // Set a default model URL
-        modelURLInput.value = 'https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb';
+        // Define the GLB URL here, same as your download link
+        const fixedGlbUrl = "https://arweave.net/aYpfaqj08Z5YaoUJ1wjT0LVA_JZTM1Jk0ck-k-z1uko?ext=glb";
 
-        function init() {
+        function init3DViewer() {
             // Scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x333333); // Dark background
 
             // Camera
-            camera = new THREE.PerspectiveCamera(75, viewerContainer.clientWidth / viewerContainer.clientHeight, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(75, glbViewerContainer.clientWidth / glbViewerContainer.clientHeight, 0.1, 1000);
             camera.position.set(0, 1, 3); // Adjust initial camera position
 
             // Renderer
             renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+            renderer.setSize(glbViewerContainer.clientWidth, glbViewerContainer.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
-            viewerContainer.appendChild(renderer.domElement);
+            glbViewerContainer.appendChild(renderer.domElement);
 
             // OrbitControls
             controls = new OrbitControls(camera, renderer.domElement);
@@ -107,26 +144,24 @@
             window.addEventListener('resize', onWindowResize, false);
 
             animate();
+            loadModel(fixedGlbUrl); // Automatically load the model
         }
 
         function onWindowResize() {
-            camera.aspect = viewerContainer.clientWidth / viewerContainer.clientHeight;
+            const containerWidth = glbViewerContainer.clientWidth;
+            const containerHeight = glbViewerContainer.clientHeight;
+            camera.aspect = containerWidth / containerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+            renderer.setSize(containerWidth, containerHeight);
         }
 
         function animate() {
             requestAnimationFrame(animate);
-            controls.update(); // only required if controls.enableDamping or controls.autoRotate are set to true
+            controls.update();
             renderer.render(scene, camera);
         }
 
         function loadModel(url) {
-            if (!url) {
-                alert('Please enter a GLB model URL.');
-                return;
-            }
-
             loadingOverlay.style.display = 'flex'; // Show loading overlay
 
             // Remove existing model if any
@@ -138,7 +173,6 @@
                         if (object.material.isMaterial) {
                             cleanMaterial(object.material);
                         } else {
-                            // An array of materials
                             for (const material of object.material) cleanMaterial(material);
                         }
                     }
@@ -158,11 +192,10 @@
                     const size = box.getSize(new THREE.Vector3());
                     const center = box.getCenter(new THREE.Vector3());
 
-                    // Adjust camera to fit the model
                     const maxDim = Math.max(size.x, size.y, size.z);
                     const fov = camera.fov * (Math.PI / 180);
                     let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-                    cameraZ *= 1.5; // Add some padding
+                    cameraZ *= 1.5;
 
                     camera.position.set(center.x, center.y, center.z + cameraZ);
                     controls.target.copy(center);
@@ -170,24 +203,20 @@
 
                     loadingOverlay.style.display = 'none'; // Hide loading overlay
                 },
-                // called while loading is progressing
                 function (xhr) {
-                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-                    loadingOverlay.innerHTML = `Loading Model... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+                    // Update loading progress
+                    loadingOverlay.innerHTML = `Loading 3D Model... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
                 },
-                // called when loading has errors
                 function (error) {
-                    console.error('An error happened', error);
-                    alert('Failed to load model. Check the URL and console for errors. CORS issues might prevent loading from some servers.');
-                    loadingOverlay.style.display = 'none'; // Hide loading overlay
-                    loadingOverlay.innerHTML = `Loading Model...`; // Reset text
+                    console.error('An error happened loading the 3D model:', error);
+                    loadingOverlay.innerHTML = `Error loading model!`;
+                    // You might want to remove the overlay after a delay or display an error icon
                 }
             );
         }
 
         function cleanMaterial(material) {
             material.dispose();
-            // Dispose textures
             for (const key of Object.keys(material)) {
                 const value = material[key];
                 if (value && typeof value === 'object' && 'minFilter' in value) {
@@ -196,19 +225,48 @@
             }
         }
 
-        // Event listeners
-        loadButton.addEventListener('click', () => loadModel(modelURLInput.value));
-        modelURLInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                loadModel(modelURLInput.value);
-            }
-        });
+        // Initialize the 3D viewer when the DOM is ready
+        document.addEventListener('DOMContentLoaded', init3DViewer);
 
-        // Initialize the viewer
-        init();
-        // Load the default model on page load
-        loadModel(modelURLInput.value);
+        // Your existing download function
+        async function downloadArweaveFile() {
+            const arweaveUrl = "https://arweave.net/aYpfaqj08Z5YaoUJ1wjT0LVA_JZTM1Jk0ck-k-z1uko?ext=glb";
+
+            const userFilename = prompt("Enter the desired filename (e.g., mycube.glb):", "CandyRockingChairRev1.glb");
+
+            if (userFilename === null || userFilename.trim() === "") {
+                console.log("Download cancelled by user.");
+                return;
+            }
+
+            const suggestedFilename = userFilename;
+
+            try {
+                const response = await fetch(arweaveUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = suggestedFilename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error("Error downloading file:", error);
+                alert("Failed to download the file. This might be due to server restrictions or network issues. Check the console for more details.");
+            }
+        }
+        // Expose downloadArweaveFile to the global scope if buttons are outside module script
+        window.downloadArweaveFile = downloadArweaveFile;
+
     </script>
+
 </body>
 </html>
-
