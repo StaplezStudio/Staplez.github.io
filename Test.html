@@ -42,15 +42,22 @@
             display: block;
         }
 
+        #glb-viewer-section {
+            display: flex; /* Make it a flex container */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center items horizontally */
+            flex: 1 1 calc(50% - 10px);
+            min-width: 300px;
+            max-width: 100%;
+        }
+
         #glb-viewer-container {
             /* The Three.js scene background handles the color, this container background is less relevant */
             border: 1px solid #444;
             border-radius: 8px;
             overflow: hidden;
             position: relative;
-            flex: 1 1 calc(50% - 10px);
-            min-width: 300px;
-            max-width: 100%;
+            width: 100%; /* Take full width of its parent glb-viewer-section */
             height: 0;
             padding-bottom: 100%; /* Maintain aspect ratio (1:1 square) */
         }
@@ -88,8 +95,10 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 15px; /* Space between controls and viewer */
+            margin-top: 10px; /* Space above buttons, keeping them tight to the viewer */
+            margin-bottom: 15px; /* Space below controls */
             flex-wrap: wrap;
+            width: 100%; /* Ensure controls take full width for centering */
         }
 
         button {
@@ -100,16 +109,33 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            /* margin-right: 10px; Removed as gap is used */
             margin-bottom: 10px; /* Kept for download buttons, if they are separate */
         }
 
         button.background-btn {
-            background-color: #555; /* Different color for background buttons */
+            width: 40px; /* Make buttons square color swatches */
+            height: 40px;
+            padding: 0; /* Remove padding for solid color fill */
+            border: 2px solid #ccc; /* Add a border for visual separation */
+            border-radius: 50%; /* Make them round */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         button.background-btn:hover {
-            background-color: #333;
+            transform: scale(1.1); /* Slightly enlarge on hover */
+            border-color: #007bff; /* Highlight border on hover */
+        }
+
+        /* Specific background colors for the buttons */
+        button[data-color="black"] {
+            background-color: #000000;
+        }
+        button[data-color="white"] {
+            background-color: #ffffff;
+        }
+        button[data-color="gray"] {
+            background-color: #808080;
         }
 
         button:hover {
@@ -119,17 +145,15 @@
         /* Media query for when items stack (mobile view) */
         @media (max-width: 768px) {
             #image-container,
-            #glb-viewer-container {
+            #glb-viewer-section { /* Apply to the new section wrapper */
                 flex-basis: 100%;
                 min-width: unset;
             }
 
             #glb-viewer-container {
-                max-width: 350px;
+                max-width: 350px; /* Constrain max width for small screens */
                 margin-left: auto;
                 margin-right: auto;
-                /* margin-left: 20px;
-                margin-right: 20px; Removed, as auto handles it */
             }
         }
 
@@ -137,8 +161,6 @@
         @media (max-width: 480px) {
             #glb-viewer-container {
                 max-width: 280px;
-                /* margin-left: 15px;
-                margin-right: 15px; Removed */
             }
         }
 
@@ -150,18 +172,17 @@
 
     <div id="media-section">
         <div id="image-container">
-            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVyCEHxvhJ9I3vweexb1_vHI?ext=png" alt="Candy Chair NFT image">
+            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVcCEHxvhJ9I3vweexb1_vHI?ext=png" alt="Candy Chair NFT image">
         </div>
 
         <div id="glb-viewer-section">
-            <div class="controls">
-                <span>Background:</span>
-                <button class="background-btn" data-color="black">Black</button>
-                <button class="background-btn" data-color="white">White</button>
-                <button class="background-btn" data-color="gray">Gray</button>
-            </div>
             <div id="glb-viewer-container">
                 <div id="loading-overlay">Loading 3D Model...</div>
+            </div>
+            <div class="controls">
+                <button class="background-btn" data-color="black" title="Black Background"></button>
+                <button class="background-btn" data-color="white" title="White Background"></button>
+                <button class="background-btn" data-color="gray" title="Gray Background"></button>
             </div>
         </div>
     </div>
