@@ -5,18 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staplez Studios Nft "Candy Chair"</title>
     <style>
-        body { margin: 0; padding: 20px; font-family: sans-serif; background-color: #222; color: #eee; }
-        h1, h3 { color: #007bff; }
-        #content-wrapper {
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            background-color: #222;
+            color: #eee;
+        }
+
+        h1, h3 {
+            color: #007bff;
+        }
+
+        #media-section {
             display: flex;
             flex-wrap: wrap; /* Allows items to wrap on smaller screens */
             gap: 20px; /* Space between items */
             align-items: flex-start; /* Align items to the top */
+            margin-bottom: 20px; /* Space below this section */
         }
-        #image-and-text {
+
+        #image-container {
             flex: 1 1 300px; /* Allows this section to grow/shrink, min-width 300px */
             max-width: 100%; /* Ensures it doesn't overflow */
+            display: flex; /* For centering the image if it's smaller */
+            justify-content: center;
+            align-items: center;
         }
+
+        #image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Slightly rounded corners for the image */
+        }
+
         #glb-viewer-container {
             flex: 1 1 300px; /* Allows this section to grow/shrink, min-width 300px */
             max-width: 100%; /* Ensures it doesn't overflow */
@@ -30,11 +52,13 @@
             align-items: center;
             position: relative; /* For loading overlay */
         }
+
         #glb-viewer-container canvas {
             display: block;
             width: 100% !important; /* Override inline style from three.js */
             height: 100% !important; /* Override inline style from three.js */
         }
+
         #loading-overlay {
             position: absolute;
             top: 0;
@@ -50,6 +74,12 @@
             z-index: 100;
             display: none; /* Hidden by default */
         }
+
+        #text-content {
+            clear: both; /* Clear floats if any, ensures text is below the flex items */
+            margin-top: 20px; /* Space above this section */
+        }
+
         button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -61,8 +91,18 @@
             margin-right: 10px;
             margin-bottom: 10px; /* For mobile stacking */
         }
+
         button:hover {
             background-color: #0056b3;
+        }
+
+        .cors-warning {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -70,19 +110,27 @@
 
     <h1>Staplez Studios Nft "Candy Chair"</h1>
 
-    <div id="content-wrapper">
-        <div id="image-and-text">
-            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVyCEHxvhJ9I_vweexb1_vHI?ext=png" alt="Candy Chair NFT image" style="max-width:100%; height:auto;">
-            <h3>Download & Licensing</h3>
-            <p>This digital asset is protected by a license agreement. Access to the file itself does not convey any usage rights; these are granted solely through ownership of the corresponding NFT. We encourage you to review the full license agreement to understand the scope of your rights as an NFT holder.</p>
-            <button onclick="downloadArweaveFile()">GLB File</button>
-            <button onclick="location.href='https://staplezstudio.github.io/CommercialLicense/'">GLB License Information</button>
+    <div id="media-section">
+        <div id="image-container">
+            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVyCEHxvhJ9I3vweexb1_vHI?ext=png" alt="Candy Chair NFT image">
         </div>
 
         <div id="glb-viewer-container">
             <div id="loading-overlay">Loading 3D Model...</div>
             </div>
     </div>
+
+    <div id="text-content">
+        <h3>Download & Licensing</h3>
+        <p>This digital asset is protected by a license agreement. Access to the file itself does not convey any usage rights; these are granted solely through ownership of the corresponding NFT. We encourage you to review the full license agreement to understand the scope of your rights as an NFT holder.</p>
+        <button onclick="downloadArweaveFile()">GLB File</button>
+        <button onclick="location.href='https://staplezstudio.github.io/CommercialLicense/'">GLB License Information</button>
+
+        <div class="cors-warning">
+            **Important Note:** The 3D model preview may not load. This is likely due to **CORS (Cross-Origin Resource Sharing)** restrictions on the Arweave link. Arweave typically doesn't send the necessary headers for direct embedding on other websites.
+        </div>
+    </div>
+
 
     <script type="importmap">
         {
@@ -209,7 +257,7 @@
                 },
                 function (error) {
                     console.error('An error happened loading the 3D model:', error);
-                    loadingOverlay.innerHTML = `Error loading model!`;
+                    loadingOverlay.innerHTML = `Error loading model! (Check console for CORS)`;
                     // You might want to remove the overlay after a delay or display an error icon
                 }
             );
