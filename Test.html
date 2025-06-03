@@ -3,7 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staplez Studios Nft "Candy Chair"</title>
+    <title>Staplez Studios NFT Page Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            display: none;
+            word-wrap: break-word;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Staplez Studios NFT Page Generator</h1>
+        <p>Fill in the details below to generate your custom NFT HTML page.</p>
+
+        <label for="nftTitle">NFT Title:</label>
+        <input type="text" id="nftTitle" placeholder="e.g., Candy Rocking Chair">
+
+        <label for="imageSource">Image Source URL:</label>
+        <input type="text" id="imageSource" placeholder="e.g., https://yourdomain.com/your-nft-image.png">
+
+        <label for="glbSource">GLB Source URL:</label>
+        <input type="text" id="glbSource" placeholder="e.g., https://yourdomain.com/your-nft-model.glb">
+
+        <label for="outputFilename">Output Filename (e.g., my_nft_page.html):</label>
+        <input type="text" id="outputFilename" placeholder="my_nft_page.html">
+
+        <button onclick="generateAndDownloadHtml()">Generate & Download HTML</button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function generateAndDownloadHtml() {
+            const nftTitle = document.getElementById('nftTitle').value.trim();
+            const imageSource = document.getElementById('imageSource').value.trim();
+            const glbSource = document.getElementById('glbSource').value.trim();
+            let outputFilename = document.getElementById('outputFilename').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            // Basic validation
+            if (!nftTitle || !imageSource || !glbSource) {
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#ffe0e0';
+                messageDiv.style.borderColor = '#ff0000';
+                messageDiv.innerHTML = 'Please fill in all required fields (NFT Title, Image Source, GLB Source).';
+                return;
+            }
+
+            // Default filename if not provided
+            if (!outputFilename) {
+                outputFilename = `${nftTitle.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.html`;
+                // Remove leading/trailing underscores if title starts/ends with non-alphanumeric
+                outputFilename = outputFilename.replace(/^_|_$/g, '');
+                if (!outputFilename) outputFilename = "nft_page.html"; // Fallback if title is empty/invalid
+            }
+            if (!outputFilename.toLowerCase().endsWith('.html')) {
+                outputFilename += '.html';
+            }
+
+            // The complete HTML template for the NFT page
+            // Note: Curly braces {{ }} are used for template literals within the main template string
+            // to avoid conflict with the actual JS variables being inserted.
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staplez Studios Nft "${nftTitle}"</title>
     <style>
         body {
             margin: 0;
@@ -172,11 +293,11 @@
 </head>
 <body>
 
-    <h1>Staplez Studios Nft "Candy Chair"</h1>
+    <h1>Staplez Studios Nft "${nftTitle}"</h1>
 
     <div id="media-section">
         <div id="image-container">
-            <img src="https://lekirfepfblixty3l7rigkank4qiihy34et5en57a6pmlpl7xrza.arweave.net/WRSIlI8oVovPG1_igygNVyCEHxvhJ9I3vweexb1_vHI?ext=png" alt="Candy Chair NFT image">
+            <img src="${imageSource}" alt="${nftTitle} NFT image">
         </div>
 
         <div id="glb-viewer-section">
@@ -197,7 +318,7 @@
         <h3 style="color: black;">Download & Licencing</h3>
         <p>This digital asset is protected by a licence agreement. Access to the file itself does not convey any usage rights; these are granted solely through ownership of the corresponding NFT. We encourage you to review the full licence agreement to understand the scope of your rights as an NFT holder.</p>
         <button onclick="downloadArweaveFile()">GLB File</button>
-        <button onclick="location.href='https://staplezstudio.github.io/CommercialLicense/'">GLB Licence Information</button>
+        <button onclick="location.href='https://staplezstudio.github.io/CommercialLicence/'">GLB Licence Information</button>
         <button onclick="location.href='https://drip.haus/Staplez/store'">Origin Source</button>
     </div>
 
@@ -219,7 +340,7 @@
         const loadingOverlay = document.getElementById('loading-overlay');
         const backgroundButtons = document.querySelectorAll('.controls .background-btn'); // Select the new buttons
 
-        const fixedGlbUrl = "https://arweave.net/aYpfaqj08Z5YaoUJ1wjT0LVA_JZTM1Jk0ck-k-z1uko?ext=glb";
+        const fixedGlbUrl = "${glbSource}";
 
         function init3DViewer() {
             scene = new THREE.Scene();
@@ -340,11 +461,11 @@
                     loadingOverlay.style.display = 'none';
                 },
                 function (xhr) {
-                    loadingOverlay.innerHTML = `Loading 3D Model... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+                    loadingOverlay.innerHTML = \`Loading 3D Model... ${Math.round(xhr.loaded / xhr.total * 100)}%\`;
                 },
                 function (error) {
                     console.error('An error happened loading the 3D model:', error);
-                    loadingOverlay.innerHTML = `Error loading model!`;
+                    loadingOverlay.innerHTML = \`Error loading model!\`;
                 }
             );
         }
@@ -362,9 +483,9 @@
         document.addEventListener('DOMContentLoaded', init3DViewer);
 
         async function downloadArweaveFile() {
-            const arweaveUrl = "https://arweave.net/aYpfaqj08Z5YaoUJ1wjT0LVA_JZTM1Jk0ck-k-z1uko?ext=glb";
+            const arweaveUrl = "${glbSource}";
 
-            const userFilename = prompt("Enter the desired filename (e.g., mycube.glb):", "CandyRockingChairRev1.glb");
+            const userFilename = prompt("Enter the desired filename (e.g., mycube.glb):", "${nftTitle}.glb");
 
             if (userFilename === null || userFilename.trim() === "") {
                 console.log("Download cancelled by user.");
@@ -377,7 +498,7 @@
                 const response = await fetch(arweaveUrl);
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                    throw new Error(\`HTTP error! Status: ${response.status} - ${response.statusText}\`);
                 }
 
                 const blob = await response.blob();
@@ -397,6 +518,30 @@
         }
         window.downloadArweaveFile = downloadArweaveFile;
 
+    </script>
+
+</body>
+</html>
+`;
+
+            // Create a Blob from the HTML content
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary link element
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = outputFilename; // Set the desired filename for download
+            document.body.appendChild(a); // Append to body (required for Firefox)
+            a.click(); // Programmatically click the link to trigger download
+            document.body.removeChild(a); // Clean up
+            URL.revokeObjectURL(url); // Release the object URL
+
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = '#d4edda';
+            messageDiv.style.borderColor = '#28a745';
+            messageDiv.innerHTML = `Success! Your NFT page "${outputFilename}" has been generated and downloaded.`;
+        }
     </script>
 
 </body>
