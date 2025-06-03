@@ -26,6 +26,9 @@
             text-align: center;
             margin-bottom: 15px; /* Reduced margin for mobile */
         }
+        p {
+            color: #333; /* Ensure paragraph text is readable */
+        }
         label {
             display: block;
             margin-bottom: 5px; /* Reduced margin for mobile */
@@ -83,9 +86,6 @@
         <label for="glbSource">GLB Source URL:</label>
         <input type="text" id="glbSource" placeholder="e.g., https://yourdomain.com/your-nft-model.glb">
 
-        <label for="outputFilename">Output Filename (e.g., my_nft_page.html):</label>
-        <input type="text" id="outputFilename" placeholder="my_nft_page.html">
-
         <button onclick="generateAndDownloadHtml()">Generate & Download HTML</button>
 
         <div id="message"></div>
@@ -96,7 +96,6 @@
             const nftTitle = document.getElementById('nftTitle').value.trim();
             const imageSource = document.getElementById('imageSource').value.trim();
             const glbSource = document.getElementById('glbSource').value.trim();
-            let outputFilename = document.getElementById('outputFilename').value.trim();
             const messageDiv = document.getElementById('message');
 
             // Basic validation
@@ -109,13 +108,23 @@
                 return;
             }
 
-            // Default filename if not provided
-            if (!outputFilename) {
-                outputFilename = `${nftTitle.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.html`;
-                // Remove leading/trailing underscores if title starts/ends with non-alphanumeric
-                outputFilename = outputFilename.replace(/^_|_$/g, '');
-                if (!outputFilename) outputFilename = "nft_page.html"; // Fallback if title is empty/invalid
+            // Prompt for filename AFTER clicking the button
+            let defaultFilename = `${nftTitle.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.html`;
+            defaultFilename = defaultFilename.replace(/^_|_$/g, ''); // Remove leading/trailing underscores
+            if (!defaultFilename) defaultFilename = "nft_page.html"; // Fallback if title is empty/invalid
+
+            let outputFilename = prompt("Enter the desired filename for the HTML page:", defaultFilename);
+
+            if (outputFilename === null || outputFilename.trim() === "") {
+                console.log("HTML download cancelled by user.");
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#fff3cd'; /* Yellowish background for cancellation */
+                messageDiv.style.borderColor = '#ffc107'; /* Yellowish border */
+                messageDiv.style.color = '#856404'; /* Dark yellow text */
+                messageDiv.innerHTML = 'HTML page generation cancelled.';
+                return; // Stop the function if user cancelled
             }
+
             if (!outputFilename.toLowerCase().endsWith('.html')) {
                 outputFilename += '.html';
             }
@@ -339,7 +348,7 @@
     <script type="module">
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-        import { OrbitControls } = 'three/addons/controls/OrbitControls.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
         let scene, camera, renderer, model, controls;
         const glbViewerContainer = document.getElementById('glb-viewer-container');
@@ -537,7 +546,7 @@
             // Create a temporary link element
             const a = document.createElement('a');
             a.href = url;
-            a.download = outputFilename; // Set the desired filename for download
+            a.download = outputFilename; // Use the filename from the prompt
             document.body.appendChild(a); // Append to body (required for Firefox)
             a.click(); // Programmatically click the link to trigger download
             document.body.removeChild(a); // Clean up
